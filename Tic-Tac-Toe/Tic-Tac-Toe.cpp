@@ -1,31 +1,18 @@
 #include <iostream>
 using namespace std;
 
-void displayTable(int sign[])
+void displayTable(char sign[])
 {
-	char displayer[9];
 
-	for (int i = 0;i < 9; i++)
-	{
-		if (sign[i] == 0) {
-			displayer[i] = ' ';
-		}
-		if (sign[i] == 1) {
-			displayer[i] = 'X';
-		}
-		if (sign[i] == 2) {
-			displayer[i] = 'O';
-		}
-	}
 
 	cout << "           |     |     " << endl;
-	cout << "        " << displayer[0] << "  |  " << displayer[1] << "  |  " << displayer[2] << endl;
+	cout << "        " << sign[1] << "  |  " << sign[2] << "  |  " << sign[3] << endl;
 	cout << "      _____|_____|_____" << endl;
 	cout << "           |     |     " << endl;
-	cout << "        " << displayer[3] << "  |  " << displayer[4] << "  |  " << displayer[5] << endl;
+	cout << "        " << sign[4] << "  |  " << sign[5] << "  |  " << sign[6] << endl;
 	cout << "      _____|_____|_____" << endl;
 	cout << "           |     |     " << endl;
-	cout << "        " << displayer[6] << "  |  " << displayer[7] << "  |  " << displayer[8] << endl;
+	cout << "        " << sign[7] << "  |  " << sign[8] << "  |  " << sign[9] << endl;
 	cout << "           |     |     " << endl << endl;
 }
 
@@ -45,18 +32,6 @@ int checkInput()
 	return data;
 }
 
-void input(int ticTacToeSquares[], int playerInput)
-{
-	cout << "Enter 1-9 to select your position" << endl;
-	if (checkInput() > 9 || checkInput() < 0) { 
-		cout << "Invalid Input" << endl; 
-		input(ticTacToeSquares, playerInput);
-	}
-	else {
-		ticTacToeSquares[checkInput() - 1] = playerInput;
-	}
-}
-
 void greeting()
 {
 	cout << "			Main Menu" << endl;
@@ -64,7 +39,88 @@ void greeting()
 	cout << "Type 0 to Exit the Game" << endl;
 }
 
-bool mainMenu()
+int winCheck(char ticTacToeSquares[])
+{
+	if (ticTacToeSquares[1] == ticTacToeSquares[2] && ticTacToeSquares[2] == ticTacToeSquares[3])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[4] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[6])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[7] == ticTacToeSquares[8] && ticTacToeSquares[8] == ticTacToeSquares[9])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[3] == ticTacToeSquares[6] && ticTacToeSquares[6] == ticTacToeSquares[9])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[1] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[9])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[3] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[7])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[1] != '1' && ticTacToeSquares[2] != '2' && ticTacToeSquares[3] != '3' && ticTacToeSquares[4] != '4' && ticTacToeSquares[5] != '5' && ticTacToeSquares[6] != '6' && ticTacToeSquares[7] != '7' && ticTacToeSquares[8] != '8' && ticTacToeSquares[9] != '9')
+	{
+		cout << "DRAW" << endl;
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+void input(char ticTacToeSquares[], char playerInput)
+{
+	cout << "Please enter nnmber between 1-9" << endl;
+	int userInput = checkInput();
+	if (userInput < 0 || userInput > 9)
+	{
+		cout << "Invalid Input" << endl;
+		input(ticTacToeSquares, playerInput);
+	}
+	if (ticTacToeSquares[userInput] != 'O' || ticTacToeSquares[userInput] != 'X')
+	{
+		ticTacToeSquares[userInput] = playerInput;
+	}
+}
+
+void playGame(char ticTac[], int turnSwaper) {
+	do
+	{
+		if (turnSwaper % 2 == 0)
+		{
+			displayTable(ticTac);
+			input(ticTac, 'X');
+		}
+		else {
+			displayTable(ticTac);
+			input(ticTac, 'O');
+		}
+		turnSwaper++;
+	} while (winCheck(ticTac) != false);
+	
+	greeting();
+}
+
+bool mainMenu(char ticTac[], int turnSwaper)
 {
 	char menuOption;
 	
@@ -73,7 +129,8 @@ bool mainMenu()
 	switch (menuOption)
 
 	{
-	case '1': 
+	case '1':
+		playGame(ticTac, turnSwaper);
 		return true;
 		break;
 
@@ -83,22 +140,19 @@ bool mainMenu()
 
 	default: 
 		cout << "Incorrect input" << endl;
-		mainMenu();
+		mainMenu(ticTac,turnSwaper);
 		break;
 	}
 }
 
-
 int main()
 {
-	int ticTacToeSquares[9] = { 0,0,0,0,0,0,0,0,0 };
+	int turnSwaper = 0;
+	char ticTacToeSquares[10] = {'0','1','2','3','4','5' ,'6','7','8','9'};
 	greeting();
 	bool exitProgram;
-	displayTable(ticTacToeSquares);
-/*
+
 	do {
-		exitProgram=mainMenu();
+		exitProgram=mainMenu(ticTacToeSquares,turnSwaper);
 	} while (exitProgram); 
-*/
-	
 }
