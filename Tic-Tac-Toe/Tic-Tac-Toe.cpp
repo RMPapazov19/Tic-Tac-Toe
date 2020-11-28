@@ -29,6 +29,34 @@ void displayTable(int sign[])
 	cout << "           |     |     " << endl << endl;
 }
 
+int checkInput()
+{
+	int data;
+	bool validInput;
+	do {
+		cin >> data;
+		if (!(validInput = cin.good()))
+		{
+			cout<<"Invalid Input" << endl;
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+		}
+	} while (!validInput);
+	return data;
+}
+
+void input(int ticTacToeSquares[], int playerInput)
+{
+	cout << "Enter 1-9 to select your position" << endl;
+	if (checkInput() > 9 || checkInput() < 0) { 
+		cout << "Invalid Input" << endl; 
+		input(ticTacToeSquares, playerInput);
+	}
+	else {
+		ticTacToeSquares[checkInput() - 1] = playerInput;
+	}
+}
+
 void greeting()
 {
 	cout << "			Main Menu" << endl;
@@ -63,7 +91,7 @@ bool mainMenu()
 
 int main()
 {
-	int ticTacToeSquares[9] = { 1,0,0,2,0,0,0,1,2 };
+	int ticTacToeSquares[9] = { 0,0,0,0,0,0,0,0,0 };
 	greeting();
 	bool exitProgram;
 	displayTable(ticTacToeSquares);
