@@ -1,158 +1,142 @@
 #include <iostream>
 using namespace std;
 
-void displayTable(char sign[])
-{
+char ticTacToeSquares[10] = { 'o','1','2','3','4','5','6','7','8','9' };
 
-
-	cout << "           |     |     " << endl;
-	cout << "        " << sign[1] << "  |  " << sign[2] << "  |  " << sign[3] << endl;
-	cout << "      _____|_____|_____" << endl;
-	cout << "           |     |     " << endl;
-	cout << "        " << sign[4] << "  |  " << sign[5] << "  |  " << sign[6] << endl;
-	cout << "      _____|_____|_____" << endl;
-	cout << "           |     |     " << endl;
-	cout << "        " << sign[7] << "  |  " << sign[8] << "  |  " << sign[9] << endl;
-	cout << "           |     |     " << endl << endl;
-}
-
-int checkInput()
-{
-	int data;
-	bool validInput;
-	do {
-		cin >> data;
-		if (!(validInput = cin.good()))
-		{
-			cout<<"Invalid Input" << endl;
-			cin.clear();
-			cin.ignore(INT_MAX, '\n');
-		}
-	} while (!validInput);
-	return data;
-}
-
-void greeting()
-{
-	cout << "			Main Menu" << endl;
-	cout << "Type 1 to Play the Game" << endl;
-	cout << "Type 0 to Exit the Game" << endl;
-}
-
-int winCheck(char ticTacToeSquares[])
-{
-	if (ticTacToeSquares[1] == ticTacToeSquares[2] && ticTacToeSquares[2] == ticTacToeSquares[3])
-	{
-		cout << "END GAME" << endl;
-		return false;
-	}
-
-	else if (ticTacToeSquares[4] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[6])
-	{
-		cout << "END GAME" << endl;
-		return false;
-	}
-
-	else if (ticTacToeSquares[7] == ticTacToeSquares[8] && ticTacToeSquares[8] == ticTacToeSquares[9])
-	{
-		cout << "END GAME" << endl;
-		return false;
-	}
-
-	else if (ticTacToeSquares[3] == ticTacToeSquares[6] && ticTacToeSquares[6] == ticTacToeSquares[9])
-	{
-		cout << "END GAME" << endl;
-		return false;
-	}
-
-	else if (ticTacToeSquares[1] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[9])
-	{
-		cout << "END GAME" << endl;
-		return false;
-	}
-
-	else if (ticTacToeSquares[3] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[7])
-	{
-		cout << "END GAME" << endl;
-		return false;
-	}
-
-	else if (ticTacToeSquares[1] != '1' && ticTacToeSquares[2] != '2' && ticTacToeSquares[3] != '3' && ticTacToeSquares[4] != '4' && ticTacToeSquares[5] != '5' && ticTacToeSquares[6] != '6' && ticTacToeSquares[7] != '7' && ticTacToeSquares[8] != '8' && ticTacToeSquares[9] != '9')
-	{
-		cout << "DRAW" << endl;
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
-void input(char ticTacToeSquares[], char playerInput)
-{
-	cout << "Please enter nnmber between 1-9" << endl;
-	int userInput = checkInput();
-	if (userInput < 0 || userInput > 9)
-	{
-		cout << "Invalid Input" << endl;
-		input(ticTacToeSquares, playerInput);
-	}
-	if (ticTacToeSquares[userInput] != 'O' || ticTacToeSquares[userInput] != 'X')
-	{
-		ticTacToeSquares[userInput] = playerInput;
-	}
-}
-
-void playGame(char ticTac[], int turnSwaper) {
-	do
-	{
-		if (turnSwaper % 2 == 0)
-		{
-			displayTable(ticTac);
-			input(ticTac, 'X');
-		}
-		else {
-			displayTable(ticTac);
-			input(ticTac, 'O');
-		}
-		turnSwaper++;
-	} while (winCheck(ticTac) != false);
-	
-	greeting();
-}
-
-bool mainMenu(char ticTac[], int turnSwaper)
-{
-	char menuOption;
-	
-	cin >> menuOption;
-
-	switch (menuOption)
-
-	{
-	case '1':
-		playGame(ticTac, turnSwaper);
-		return true;
-		break;
-
-	case '0':
-		return false;
-		break;
-
-	default: 
-		cout << "Incorrect input" << endl;
-		mainMenu(ticTac,turnSwaper);
-		break;
-	}
-}
+int winCheck();
+void displayTable();
 
 int main()
 {
-	int turnSwaper = 0;
-	char ticTacToeSquares[10] = {'0','1','2','3','4','5' ,'6','7','8','9'};
-	greeting();
-	bool exitProgram;
+    int player = 1, i, choice;
 
-	do {
-		exitProgram=mainMenu(ticTacToeSquares,turnSwaper);
-	} while (exitProgram); 
+    char mark;
+    do
+    {
+        displayTable();
+        player = (player % 2) ? 1 : 2;
+
+        cout << "Player " << player << ", enter a number:  ";
+        cin >> choice;
+
+        if (!cin)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            player--;
+        }
+
+        else {
+
+            mark = (player == 1) ? 'X' : 'O';
+
+            if (choice == 1 && ticTacToeSquares[1] == '1')
+
+                ticTacToeSquares[1] = mark;
+            else if (choice == 2 && ticTacToeSquares[2] == '2')
+
+                ticTacToeSquares[2] = mark;
+            else if (choice == 3 && ticTacToeSquares[3] == '3')
+
+                ticTacToeSquares[3] = mark;
+            else if (choice == 4 && ticTacToeSquares[4] == '4')
+
+                ticTacToeSquares[4] = mark;
+            else if (choice == 5 && ticTacToeSquares[5] == '5')
+
+                ticTacToeSquares[5] = mark;
+            else if (choice == 6 && ticTacToeSquares[6] == '6')
+
+                ticTacToeSquares[6] = mark;
+            else if (choice == 7 && ticTacToeSquares[7] == '7')
+
+                ticTacToeSquares[7] = mark;
+            else if (choice == 8 && ticTacToeSquares[8] == '8')
+
+                ticTacToeSquares[8] = mark;
+            else if (choice == 9 && ticTacToeSquares[9] == '9')
+
+                ticTacToeSquares[9] = mark;
+            else
+            {
+                cout << "Incorrect input ";
+
+                player--;
+                cin.ignore();
+                cin.get();
+            }
+        }
+        i = winCheck();
+
+        player++;
+    } while (i == -1);
+    displayTable();
+    if (i == 1)
+
+        cout << "==>\aPlayer " << --player << " win ";
+    else
+        cout << "==>\aGame draw";
+
+    cin.ignore();
+    cin.get();
+    return 0;
+}
+
+int winCheck()
+{
+    if (ticTacToeSquares[1] == ticTacToeSquares[2] && ticTacToeSquares[2] == ticTacToeSquares[3])
+
+        return 1;
+    else if (ticTacToeSquares[4] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[6])
+
+        return 1;
+    else if (ticTacToeSquares[7] == ticTacToeSquares[8] && ticTacToeSquares[8] == ticTacToeSquares[9])
+
+        return 1;
+    else if (ticTacToeSquares[1] == ticTacToeSquares[4] && ticTacToeSquares[4] == ticTacToeSquares[7])
+
+        return 1;
+    else if (ticTacToeSquares[2] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[8])
+
+        return 1;
+    else if (ticTacToeSquares[3] == ticTacToeSquares[6] && ticTacToeSquares[6] == ticTacToeSquares[9])
+
+        return 1;
+    else if (ticTacToeSquares[1] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[9])
+
+        return 1;
+    else if (ticTacToeSquares[3] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[7])
+
+        return 1;
+    else if (ticTacToeSquares[1] != '1' && ticTacToeSquares[2] != '2' && ticTacToeSquares[3] != '3'
+        && ticTacToeSquares[4] != '4' && ticTacToeSquares[5] != '5' && ticTacToeSquares[6] != '6'
+        && ticTacToeSquares[7] != '7' && ticTacToeSquares[8] != '8' && ticTacToeSquares[9] != '9')
+
+        return 0;
+    else
+        return -1;
+}
+
+void displayTable()
+{
+    system("cls");
+    cout << "\n\n\tTic Tac Toe\n\n";
+
+    cout << "Player 1 (X)  -  Player 2 (O)" << endl << endl;
+    cout << endl;
+
+    cout << "     |     |     " << endl;
+    cout << "  " << ticTacToeSquares[1] << "  |  " << ticTacToeSquares[2] << "  |  " << ticTacToeSquares[3] << endl;
+
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+
+    cout << "  " << ticTacToeSquares[4] << "  |  " << ticTacToeSquares[5] << "  |  " << ticTacToeSquares[6] << endl;
+
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+
+    cout << "  " << ticTacToeSquares[7] << "  |  " << ticTacToeSquares[8] << "  |  " << ticTacToeSquares[9] << endl;
+
+    cout << "     |     |     " << endl << endl;
 }
