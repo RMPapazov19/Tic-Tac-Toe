@@ -76,6 +76,18 @@ int winCheck(char ticTacToeSquares[])
 		return false;
 	}
 
+	else if (ticTacToeSquares[1] == ticTacToeSquares[4] && ticTacToeSquares[4] == ticTacToeSquares[7])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
+	else if (ticTacToeSquares[2] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[8])
+	{
+		cout << "END GAME" << endl;
+		return false;
+	}
+
 	else if (ticTacToeSquares[1] != '1' && ticTacToeSquares[2] != '2' && ticTacToeSquares[3] != '3' && ticTacToeSquares[4] != '4' && ticTacToeSquares[5] != '5' && ticTacToeSquares[6] != '6' && ticTacToeSquares[7] != '7' && ticTacToeSquares[8] != '8' && ticTacToeSquares[9] != '9')
 	{
 		cout << "DRAW" << endl;
