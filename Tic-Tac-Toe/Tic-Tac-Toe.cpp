@@ -1,32 +1,32 @@
 #include <iostream>
 using namespace std;
 
-char ticTacToeSquares[10] = { 'o','1','2','3','4','5','6','7','8','9' };
+char ticTacToeSquares[10] = { 'o','1','2','3','4','5','6','7','8','9' };//main array 
 
-int winCheck();
-void displayTable();
+int winCheck();//function that check who will win
+void displayTable();//fuction that displays the game
 
-int main()
+int main()//main function
 {
     int player = 1, i, choice;
 
     char mark;
-    do
+    do//do while loop that is the main function of the game
     {
         displayTable();
         player = (player % 2) ? 1 : 2;
 
         cout << "Player " << player << ", enter a number:  ";
-        cin >> choice;
+        cin >> choice;//request the player to enter a number
 
         if (!cin)
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             player--;
-        }
+        }//checks if the input is correct
 
-        else {
+        else {//places the choices
 
             mark = (player == 1) ? 'X' : 'O';
 
@@ -57,13 +57,13 @@ int main()
             else if (choice == 9 && ticTacToeSquares[9] == '9')
 
                 ticTacToeSquares[9] = mark;
-            else
+            else//check if the input is correct
             {
                 cout << "Incorrect input ";
 
                 player--;
                 cin.ignore();
-                cin.get();
+                cin.get();//game end
             }
         }
         i = winCheck();
@@ -73,16 +73,16 @@ int main()
     displayTable();
     if (i == 1)
 
-        cout << "==>\aPlayer " << --player << " win ";
+        cout << "==>\aPlayer " << --player << " win ";//displays who is the winner
     else
         cout << "==>\aGame draw";
 
     cin.ignore();
     cin.get();
-    return 0;
+    return 0;//game end
 }
 
-int winCheck()
+int winCheck()//checks if horizontal, vertical or diagonal three positions are matching
 {
     if (ticTacToeSquares[1] == ticTacToeSquares[2] && ticTacToeSquares[2] == ticTacToeSquares[3])
 
@@ -119,7 +119,7 @@ int winCheck()
 
 void displayTable()
 {
-    system("cls");
+    system("cls");//clears the screen
     cout << "\n\n\tTic Tac Toe\n\n";
 
     cout << "Player 1 (X)  -  Player 2 (O)" << endl << endl;
