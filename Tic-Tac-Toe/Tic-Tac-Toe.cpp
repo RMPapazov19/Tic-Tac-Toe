@@ -21,14 +21,14 @@ int checkInput()
 	bool validInput;
 	do {
 		cin >> data;
-		if (!(validInput = cin.good()))
+		if (!(validInput = cin.good()))//Checks if the input is correct
 		{
 			cout << "Invalid Input" << endl;
-			cin.clear();
-			cin.ignore(INT_MAX, '\n');
+			cin.clear();//Clear error flags
+			cin.ignore(INT_MAX, '\n');//Discard the row
 		}
 	} while (!validInput);
-	return data;
+	return data;//Return user input
 }
 
 void greeting()
@@ -100,7 +100,7 @@ int winCheck(char ticTacToeSquares[])
 
 void input(char ticTacToeSquares[], char playerInput)
 {
-	cout << "Please enter nnmber between 1-9" << endl;
+	cout << "Please enter number between 1-9" << endl;
 	int userInput = checkInput();
 	if (userInput < 0 || userInput > 9)
 	{
