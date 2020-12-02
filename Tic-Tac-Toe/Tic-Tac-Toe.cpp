@@ -1,9 +1,10 @@
 #include <iostream>
+
 using namespace std;
+int player = 0;
 
 void displayTable(char sign[])
 {
-
 	cout << "           |     |     " << endl;
 	cout << "        " << sign[1] << "  |  " << sign[2] << "  |  " << sign[3] << endl;
 	cout << "      _____|_____|_____" << endl;
@@ -42,55 +43,137 @@ int winCheck(char ticTacToeSquares[])
 {
 	if (ticTacToeSquares[1] == ticTacToeSquares[2] && ticTacToeSquares[2] == ticTacToeSquares[3])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[4] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[6])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[7] == ticTacToeSquares[8] && ticTacToeSquares[8] == ticTacToeSquares[9])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[3] == ticTacToeSquares[6] && ticTacToeSquares[6] == ticTacToeSquares[9])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[1] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[9])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[3] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[7])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[1] == ticTacToeSquares[4] && ticTacToeSquares[4] == ticTacToeSquares[7])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[2] == ticTacToeSquares[5] && ticTacToeSquares[5] == ticTacToeSquares[8])
 	{
-		cout << "END GAME" << endl;
+		if (player % 2 != 0)
+		{
+			cout << "***********************************\n";
+			cout << "* Game over! The first player wins!         *\n";
+			cout << "***********************************\n";
+		}
+		else {
+			cout << "***********************************\n";
+			cout << "* Game over! The second player wins!         *\n";
+			cout << "***********************************\n";
+		}
 		return false;
 	}
 
 	else if (ticTacToeSquares[1] != '1' && ticTacToeSquares[2] != '2' && ticTacToeSquares[3] != '3' && ticTacToeSquares[4] != '4' && ticTacToeSquares[5] != '5' && ticTacToeSquares[6] != '6' && ticTacToeSquares[7] != '7' && ticTacToeSquares[8] != '8' && ticTacToeSquares[9] != '9')
 	{
-		cout << "DRAW" << endl;
+	cout << "***********************************\n";
+	cout << "* Game over! DRAW!         *\n";
+	cout << "***********************************\n";
 		return false;
 	}
 	else {
@@ -120,10 +203,12 @@ void playGame(char ticTac[], int turnSwaper) {
 		{
 			displayTable(ticTac);
 			input(ticTac, 'X');
+			player++;
 		}
 		else {
 			displayTable(ticTac);
 			input(ticTac, 'O');
+			player++;
 		}
 		turnSwaper++;
 	} while (winCheck(ticTac) != false);
@@ -162,8 +247,12 @@ int main()
 	char ticTacToeSquares[10] = { '0','1','2','3','4','5' ,'6','7','8','9' };
 	greeting();
 	bool exitProgram;
-
+	
 	do {
 		exitProgram = mainMenu(ticTacToeSquares, turnSwaper);
+		for (int i = 0; i < 10; i++)
+		{
+			ticTacToeSquares[i] = (char)i+48;
+		}
 	} while (exitProgram);
 }
