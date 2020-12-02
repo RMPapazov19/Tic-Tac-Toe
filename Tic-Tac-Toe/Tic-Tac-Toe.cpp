@@ -190,7 +190,13 @@ void input(char ticTacToeSquares[], char playerInput)
 		cout << "Invalid Input" << endl;
 		input(ticTacToeSquares, playerInput);
 	}
-	if (ticTacToeSquares[userInput] != 'O' || ticTacToeSquares[userInput] != 'X')
+
+	if (ticTacToeSquares[userInput] != 'O')
+	{
+		ticTacToeSquares[userInput] = playerInput;
+	}
+
+	else if (ticTacToeSquares[userInput] != 'X')
 	{
 		ticTacToeSquares[userInput] = playerInput;
 	}
